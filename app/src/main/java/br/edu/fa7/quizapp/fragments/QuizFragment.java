@@ -1,9 +1,7 @@
-package br.edu.fa7.quizapp;
+package br.edu.fa7.quizapp.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,34 +11,24 @@ import android.widget.ImageView;
 
 import java.util.Random;
 
+import br.edu.fa7.quizapp.R;
+import br.edu.fa7.quizapp.entities.Quiz;
+
 public class QuizFragment extends Fragment {
 
-    private static final String ARG_IMAGE = "image";
-    private static final String ARG_CORRECT = "correct";
-    private static final String ARG_INCORRECT_ONE = "incorrectOne";
-    private static final String ARG_INCORRECT_TWO = "incorrectTwo";
-    private static final String ARG_INCORRECT_THREE = "incorrectThree";
+    private static final String ARG_QUIZ = "quiz";
 
-    private @DrawableRes int mImage;
-    private String mCorrect;
-    private String mIncorrectOne;
-    private String mIncorrectTwo;
-    private String mIncorrectThree;
+    private Quiz mQuiz;
 
     private OnFragmentInteractionListener mListener;
 
     public QuizFragment() {
     }
 
-    public static QuizFragment newInstance(@DrawableRes int image, String correct, String incorrectOne,
-                                           String incorrectTwo, String incorrectThree) {
+    public static QuizFragment newInstance(Quiz quiz) {
         QuizFragment fragment = new QuizFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_IMAGE, image);
-        args.putString(ARG_CORRECT, correct);
-        args.putString(ARG_INCORRECT_ONE, incorrectOne);
-        args.putString(ARG_INCORRECT_TWO, incorrectTwo);
-        args.putString(ARG_INCORRECT_THREE, incorrectThree);
+        args.putParcelable(ARG_QUIZ, quiz);
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,11 +37,7 @@ public class QuizFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mImage = getArguments().getInt(ARG_IMAGE);
-            mCorrect = getArguments().getString(ARG_CORRECT);
-            mIncorrectOne = getArguments().getString(ARG_INCORRECT_ONE);
-            mIncorrectTwo = getArguments().getString(ARG_INCORRECT_TWO);
-            mIncorrectThree = getArguments().getString(ARG_INCORRECT_THREE);
+            mQuiz = getArguments().getParcelable(ARG_QUIZ);
         }
     }
 
@@ -65,7 +49,7 @@ public class QuizFragment extends Fragment {
         int pos = new Random().nextInt(4) + 1;
 
         ImageView imageViewQuiz = (ImageView) view.findViewById(R.id.img_quiz);
-        imageViewQuiz.setImageResource(mImage);
+        imageViewQuiz.setImageResource(mQuiz.getImage());
 
         Button buttonOne = (Button) view.findViewById(R.id.btn_one);
         buttonOne.setOnClickListener(new View.OnClickListener() {
@@ -98,28 +82,28 @@ public class QuizFragment extends Fragment {
 
         switch (pos) {
             case 1: {
-                buttonOne.setText(mCorrect);
-                buttonTwo.setText(mIncorrectThree);
-                buttonThree.setText(mIncorrectOne);
-                buttonFour.setText(mIncorrectTwo);
+                buttonOne.setText(mQuiz.getCorrect());
+                buttonTwo.setText(mQuiz.getIncorrectThree());
+                buttonThree.setText(mQuiz.getIncorrectOne());
+                buttonFour.setText(mQuiz.getIncorrectTwo());
             } break;
             case 2: {
-                buttonTwo.setText(mCorrect);
-                buttonOne.setText(mIncorrectThree);
-                buttonThree.setText(mIncorrectTwo);
-                buttonFour.setText(mIncorrectOne);
+                buttonTwo.setText(mQuiz.getCorrect());
+                buttonOne.setText(mQuiz.getIncorrectThree());
+                buttonThree.setText(mQuiz.getIncorrectTwo());
+                buttonFour.setText(mQuiz.getIncorrectOne());
             } break;
             case 3: {
-                buttonThree.setText(mCorrect);
-                buttonOne.setText(mIncorrectOne);
-                buttonTwo.setText(mIncorrectTwo);
-                buttonFour.setText(mIncorrectThree);
+                buttonThree.setText(mQuiz.getCorrect());
+                buttonOne.setText(mQuiz.getIncorrectOne());
+                buttonTwo.setText(mQuiz.getIncorrectTwo());
+                buttonFour.setText(mQuiz.getIncorrectThree());
             } break;
             case 4: {
-                buttonFour.setText(mCorrect);
-                buttonOne.setText(mIncorrectTwo);
-                buttonTwo.setText(mIncorrectOne);
-                buttonThree.setText(mIncorrectThree);
+                buttonFour.setText(mQuiz.getCorrect());
+                buttonOne.setText(mQuiz.getIncorrectTwo());
+                buttonTwo.setText(mQuiz.getIncorrectOne());
+                buttonThree.setText(mQuiz.getIncorrectThree());
             } break;
         }
 
@@ -128,7 +112,7 @@ public class QuizFragment extends Fragment {
 
     public void onButtonPressed(String item) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(item.equals(mCorrect));
+            mListener.onFragmentInteraction(item.equals(mQuiz.getCorrect()));
         }
     }
 
