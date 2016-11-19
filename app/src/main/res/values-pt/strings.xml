@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_quiz">Quem é esse Pokémon?</string>
+    <string name="text_result">%1$s você acertou %2$d perguntas de um total de %3$d</string>
+
+    <string name="hint_name">Nome</string>
+
+    <string name="action_start">Iniciar</string>
+
+    <string name="toast_correct">Resposta correta</string>
+    <string name="toast_incorrect">Resposta incorreta</string>
+</resources>

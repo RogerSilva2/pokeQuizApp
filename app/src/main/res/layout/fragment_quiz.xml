@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.edu.fa7.quizapp.QuizFragment"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_quiz"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/alakazam"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:id="@+id/txt_quiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/text_quiz"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/colorAccent"
+        style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+    <Button
+        android:id="@+id/btn_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/colorAccent"
+        style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+    <Button
+        android:id="@+id/btn_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/colorAccent"
+        style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+    <Button
+        android:id="@+id/btn_four"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/colorAccent"
+        style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+</LinearLayout>

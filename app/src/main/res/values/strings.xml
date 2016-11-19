@@ -1,3 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">QuizApp</string>
+
+    <string name="text_quiz">Who is this Pokemon?</string>
+    <string name="text_result">%1$s you got %2$d questions out of a total of %3$d</string>
+
+    <string name="hint_name">Name</string>
+
+    <string name="action_start">Start</string>
+
+    <string name="toast_correct">Answer correct</string>
+    <string name="toast_incorrect">Answer incorrect</string>
 </resources>
