@@ -62,6 +62,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+        FloatingActionButton buttonList = (FloatingActionButton) findViewById(R.id.fab_list);
+        if (buttonList != null) {
+            buttonList.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showListQuestionActivity();
+                }
+            });
+        }
     }
 
     private void showQuizActivity() {
@@ -71,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("name", editTextName.getText().toString());
         }
         intent.putParcelableArrayListExtra("questions",
-                QuestionDAO.getInstance(getApplicationContext()).selectAll(countQuestion()));
+                QuestionDAO.getInstance(getApplicationContext()).selectAllWithLimit(countQuestion()));
         startActivity(intent);
     }
 
@@ -106,6 +116,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void showAddQuestionActivity() {
         Intent intent = new Intent(MainActivity.this, AddQuestionActivity.class);
+        startActivity(intent);
+    }
+
+    private void showListQuestionActivity() {
+        Intent intent = new Intent(MainActivity.this, ListQuestionActivity.class);
         startActivity(intent);
     }
 }

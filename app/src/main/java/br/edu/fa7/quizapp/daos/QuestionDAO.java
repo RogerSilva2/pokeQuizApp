@@ -44,9 +44,17 @@ public class QuestionDAO {
         mDataBase = persistenceHelper.getWritableDatabase();
     }
 
-    public ArrayList<Question> selectAll(int limit) {
+    public ArrayList<Question> selectAll() {
+        return select("");
+    }
+
+    public ArrayList<Question> selectAllWithLimit(int limit) {
+        return select(" ORDER BY RANDOM() LIMIT " + limit);
+    }
+
+    private ArrayList<Question> select(String where) {
         ArrayList<Question> questions = new ArrayList<>();
-        String query = "SELECT * FROM " + TABLE + " ORDER BY RANDOM() LIMIT " + limit + ";";
+        String query = "SELECT * FROM " + TABLE + where + ";";
 
         Cursor cursor = mDataBase.rawQuery(query, null);
         if (cursor != null) {
