@@ -44,7 +44,7 @@ public class AnswerDAO {
 
     public ArrayList<Answer> selectAll(Integer questionId) {
         ArrayList<Answer> answers = new ArrayList<>();
-        String query = "SELECT * FROM " + TABLE + " WHERE " + QUESTION_ID + " = " + questionId + ";";
+        String query = "SELECT * FROM " + TABLE + " WHERE " + QUESTION_ID + " = " + questionId + " ORDER BY RANDOM();";
 
         Cursor cursor = mDataBase.rawQuery(query, null);
         if (cursor != null) {

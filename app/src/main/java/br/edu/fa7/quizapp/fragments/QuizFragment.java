@@ -8,27 +8,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.util.Random;
+import com.squareup.picasso.Picasso;
 
 import br.edu.fa7.quizapp.R;
-import br.edu.fa7.quizapp.entities.Quiz;
+import br.edu.fa7.quizapp.entities.Question;
 
 public class QuizFragment extends Fragment {
 
-    private static final String ARG_QUIZ = "quiz";
+    private static final String ARG_QUESTION = "question";
 
-    private Quiz mQuiz;
+    private Question mQuestion;
 
     private OnFragmentInteractionListener mListener;
 
     public QuizFragment() {
     }
 
-    public static QuizFragment newInstance(Quiz quiz) {
+    public static QuizFragment newInstance(Question question) {
         QuizFragment fragment = new QuizFragment();
         Bundle args = new Bundle();
-        args.putParcelable(ARG_QUIZ, quiz);
+        args.putParcelable(ARG_QUESTION, question);
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,7 +38,7 @@ public class QuizFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mQuiz = getArguments().getParcelable(ARG_QUIZ);
+            mQuestion = getArguments().getParcelable(ARG_QUESTION);
         }
     }
 
@@ -46,73 +47,55 @@ public class QuizFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
 
-        int pos = new Random().nextInt(4) + 1;
-
         ImageView imageViewQuiz = (ImageView) view.findViewById(R.id.img_quiz);
-        imageViewQuiz.setImageResource(mQuiz.getImage());
+        Picasso.with(getActivity())
+                .load(mQuestion.getImage())
+                .placeholder(R.drawable.alakazam)
+                .error(R.drawable.beedrill)
+                .into(imageViewQuiz);
+
+        TextView textViewQuiz = (TextView) view.findViewById(R.id.txt_quiz);
+        textViewQuiz.setText(mQuestion.getText());
 
         Button buttonOne = (Button) view.findViewById(R.id.btn_one);
         buttonOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onButtonPressed(((Button) v).getText().toString());
+                onButtonPressed(0);
             }
         });
+        buttonOne.setText(mQuestion.getAnswers().get(0).getText());
         Button buttonTwo = (Button) view.findViewById(R.id.btn_two);
         buttonTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onButtonPressed(((Button) v).getText().toString());
+                onButtonPressed(1);
             }
         });
+        buttonTwo.setText(mQuestion.getAnswers().get(1).getText());
         Button buttonThree = (Button) view.findViewById(R.id.btn_three);
         buttonThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onButtonPressed(((Button) v).getText().toString());
+                onButtonPressed(2);
             }
         });
+        buttonThree.setText(mQuestion.getAnswers().get(2).getText());
         Button buttonFour = (Button) view.findViewById(R.id.btn_four);
         buttonFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onButtonPressed(((Button) v).getText().toString());
+                onButtonPressed(3);
             }
         });
-
-        switch (pos) {
-            case 1: {
-                buttonOne.setText(mQuiz.getCorrect());
-                buttonTwo.setText(mQuiz.getIncorrectThree());
-                buttonThree.setText(mQuiz.getIncorrectOne());
-                buttonFour.setText(mQuiz.getIncorrectTwo());
-            } break;
-            case 2: {
-                buttonTwo.setText(mQuiz.getCorrect());
-                buttonOne.setText(mQuiz.getIncorrectThree());
-                buttonThree.setText(mQuiz.getIncorrectTwo());
-                buttonFour.setText(mQuiz.getIncorrectOne());
-            } break;
-            case 3: {
-                buttonThree.setText(mQuiz.getCorrect());
-                buttonOne.setText(mQuiz.getIncorrectOne());
-                buttonTwo.setText(mQuiz.getIncorrectTwo());
-                buttonFour.setText(mQuiz.getIncorrectThree());
-            } break;
-            case 4: {
-                buttonFour.setText(mQuiz.getCorrect());
-                buttonOne.setText(mQuiz.getIncorrectTwo());
-                buttonTwo.setText(mQuiz.getIncorrectOne());
-                buttonThree.setText(mQuiz.getIncorrectThree());
-            } break;
-        }
+        buttonFour.setText(mQuestion.getAnswers().get(3).getText());
 
         return view;
     }
 
-    public void onButtonPressed(String item) {
+    public void onButtonPressed(int posistion) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(item.equals(mQuiz.getCorrect()));
+            mListener.onFragmentInteraction(mQuestion.getAnswers().get(posistion).getCorrect());
         }
     }
 

@@ -9,7 +9,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import br.edu.fa7.quizapp.R;
-import br.edu.fa7.quizapp.entities.Quiz;
+import br.edu.fa7.quizapp.entities.Question;
 import br.edu.fa7.quizapp.fragments.QuizFragment;
 
 public class QuizActivity extends AppCompatActivity implements QuizFragment.OnFragmentInteractionListener {
@@ -17,21 +17,21 @@ public class QuizActivity extends AppCompatActivity implements QuizFragment.OnFr
     private String name = "";
     private int countQuiz = 0;
     private int countCorrect = 0;
-    private ArrayList<Quiz> quizList;
+    private ArrayList<Question> questions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         name = getIntent().getStringExtra("name");
-        quizList = getIntent().getParcelableArrayListExtra("quiz");
+        questions = getIntent().getParcelableArrayListExtra("questions");
         onFragmentInteraction(false);
     }
 
-    public void showFirstFragment(Quiz quiz) {
+    public void showFirstFragment(Question question) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, QuizFragment.newInstance(quiz))
+                .replace(R.id.container, QuizFragment.newInstance(question))
                 .commit();
     }
 
@@ -53,8 +53,8 @@ public class QuizActivity extends AppCompatActivity implements QuizFragment.OnFr
             Toast.makeText(this, (isCorrect) ? R.string.toast_correct : R.string.toast_incorrect, Toast.LENGTH_SHORT).show();
         }
 
-        if (countQuiz < quizList.size()) {
-            showFirstFragment(quizList.get(countQuiz));
+        if (countQuiz < questions.size()) {
+            showFirstFragment(questions.get(countQuiz));
             countQuiz++;
         } else {
             showQuizActivity();

@@ -30,8 +30,8 @@ public class PersistenceHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(AnswerDAO.SCRIPT_CREATE_TABLE_ANSWER);
         db.execSQL(QuestionDAO.SCRIPT_CREATE_TABLE_QUESTION);
+        db.execSQL(AnswerDAO.SCRIPT_CREATE_TABLE_ANSWER);
     }
 
     @Override
