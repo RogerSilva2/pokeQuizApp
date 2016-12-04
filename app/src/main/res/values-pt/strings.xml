@@ -4,9 +4,24 @@
     <string name="text_result">%1$s você acertou %2$d perguntas de um total de %3$d</string>
 
     <string name="hint_name">Nome</string>
+    <string name="hint_question">Pergunta</string>
+    <string name="hint_image">URL da imagem</string>
+    <string name="hint_answer">Resposta</string>
 
     <string name="action_start">Iniciar</string>
+    <string name="action_save">Salvar</string>
 
     <string name="toast_correct">Resposta correta</string>
     <string name="toast_incorrect">Resposta incorreta</string>
+    <string name="snackbar_question_save">Pergunta salva</string>
+
+    <string name="error_name_required">Nome é obrigatório</string>
+    <string name="error_question_required">Pergunta é obrigatória</string>
+    <string name="error_answer_required">Resposta é obrigatória</string>
+
+    <string-array name="levels_array">
+        <item>Fácil</item>
+        <item>Médio</item>
+        <item>Difícil</item>
+    </string-array>
 </resources>

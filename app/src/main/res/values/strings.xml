@@ -6,9 +6,24 @@
     <string name="text_result">%1$s you got %2$d questions out of a total of %3$d</string>
 
     <string name="hint_name">Name</string>
+    <string name="hint_question">Question</string>
+    <string name="hint_image">Image URL</string>
+    <string name="hint_answer">Answer</string>
 
     <string name="action_start">Start</string>
+    <string name="action_save">Save</string>
 
     <string name="toast_correct">Answer correct</string>
     <string name="toast_incorrect">Answer incorrect</string>
+    <string name="snackbar_question_save">Question save</string>
+
+    <string name="error_name_required">Name is required</string>
+    <string name="error_question_required">Question is required</string>
+    <string name="error_answer_required">Answer is required</string>
+
+    <string-array name="levels_array">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
 </resources>
