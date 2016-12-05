@@ -1,16 +1,14 @@
 package br.edu.fa7.quizapp.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import br.edu.fa7.quizapp.R;
 import br.edu.fa7.quizapp.entities.Question;
@@ -19,18 +17,22 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
     private Context mContext;
     private ArrayList<Question> mQuestions = new ArrayList<>();
+    private View.OnClickListener mListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView mText;
+        public TextView mTextViewQuestion;
+        public CardView mCardViewQuestion;
         public ViewHolder(View view) {
             super(view);
-            mText = (TextView) view.findViewById(R.id.txt_question);
+            mTextViewQuestion = (TextView) view.findViewById(R.id.txt_question);
+            mCardViewQuestion = (CardView) view.findViewById(R.id.cdv_question);
         }
     }
 
-    public QuestionAdapter(Context context, ArrayList<Question> questions) {
+    public QuestionAdapter(Context context, ArrayList<Question> questions, View.OnClickListener listener) {
         mContext = context;
         mQuestions = questions;
+        mListener = listener;
     }
 
     @Override
@@ -44,7 +46,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Question question = mQuestions.get(position);
-        holder.mText.setText(question.getText());
+        holder.mTextViewQuestion.setText(question.getText());
+        holder.mCardViewQuestion.setTag(position);
+        holder.mCardViewQuestion.setOnClickListener(mListener);
     }
 
     @Override

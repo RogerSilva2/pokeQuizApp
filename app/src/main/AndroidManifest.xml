@@ -32,7 +32,11 @@
             android:name=".activities.AddQuestionActivity"
             android:configChanges="keyboard|screenSize|orientation"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.ListQuestionActivity"
+        <activity
+            android:name=".activities.ListQuestionActivity"
+            android:configChanges="keyboard|screenSize|orientation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.DetailQuestionActivity"
             android:configChanges="keyboard|screenSize|orientation"
             android:screenOrientation="portrait" />
     </application>
